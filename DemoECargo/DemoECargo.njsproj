@@ -56,7 +56,6 @@
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\js\" />
-    <Folder Include="public\app\" />
     <Folder Include="public\styles\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />
