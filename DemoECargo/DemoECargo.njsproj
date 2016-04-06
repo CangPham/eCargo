@@ -20,8 +20,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
     <ProjectView>ShowAllFiles</ProjectView>
-    <NodejsPort>1337</NodejsPort>
-    <StartWebBrowser>true</StartWebBrowser>
+    <NodejsPort>2000</NodejsPort>
+    <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,11 +33,17 @@
     <Compile Include="app.js" />
     <Compile Include="controllers\index.js" />
     <Compile Include="controllers\productsController.js" />
+    <Compile Include="data\database.js" />
+    <Compile Include="data\dbConnection.js" />
+    <Compile Include="data\index.js" />
+    <Compile Include="public\js\eCargoApp.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
+    <Content Include=".bowerrc" />
     <Content Include="package.json" />
-    <Content Include="public\stylesheets\style.styl" />
+    <Content Include="public\index.html" />
+    <Content Include="public\styles\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
@@ -46,10 +52,12 @@
   <ItemGroup>
     <Folder Include="bin\" />
     <Folder Include="controllers\" />
+    <Folder Include="data\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
-    <Folder Include="public\javascripts\" />
-    <Folder Include="public\stylesheets\" />
+    <Folder Include="public\js\" />
+    <Folder Include="public\app\" />
+    <Folder Include="public\styles\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />
   </ItemGroup>

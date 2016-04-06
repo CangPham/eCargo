@@ -1,6 +1,7 @@
 ﻿//index.js
 (function (controllers) {
-	"use strict";
+    "use strict";
+
 	var productsController = require('./productsController.js');
 	controllers.init = function (app) { 
 		productsController.init(app);
