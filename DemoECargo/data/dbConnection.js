@@ -5,8 +5,9 @@
     var mysql = require('mysql');
 	var theDb = null;
     dbConnection.getDb = function (next) {
-        if (!theDb) {            
+        if (!theDb) {
             var connection = mysql.createConnection({
+                connectionLimit: 100,
                 host     : '127.0.0.1',
                 user     : 'root',
                 password : '',
@@ -24,7 +25,6 @@
         } else {
             next(null, theDb);
         }
-        connection.end();
     };   
 
 })(module.exports);

@@ -5,24 +5,37 @@
 	var data = require('../data');
 
 	productsController.init = function (app) {
-        app.get("/api/products/", function (req, res) {
-            data.getTop10Products(function (err, results) {
-                res.set("Content-Type", "application/json");
-                res.send(results);
-			});            
+        app.get("/api/products/", function (req, res, next) {
+            var str = "SELECT * from products ORDER BY id DESC LIMIT 10";
+            data.exec(str)
+                .then(function (results) {
+                    //res.set("Content-Type", "application/json");
+                    //res.send(results);
+                res.json(results);
+                })
+                .catch(next);            
         });
 
-        app.get("/api/products/:Id", function (req, res) {
+        app.get("/api/products/:Id", function (req, res, next) {
             
             var productId = req.params.Id;
-            data.getProductById(productId, function (err, results) {
-                if (err) {
-                    res.send(400, err);
-                } else {
-                    res.set("Content-Type", "application/json");
-                    res.send(results);
-                }
-            });
+            var str = "SELECT Name FROM products WHERE id = " + productId;
+            data.exec(str)
+                .then(function (results) {
+                    res.json(results);
+                })
+                .catch(next);   
+        });
+
+        app.get("/api/productsByBrandId/:Id", function (req, res, next) {
+            
+            var brandId = req.params.Id;
+            var str = "CALL getProductsByBrandId(" + brandId + ")";
+            data.exec(str)
+                .then(function (results) {
+                res.json(results);
+            })
+                .catch(next);
         });
 	};
 

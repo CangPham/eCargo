@@ -31,7 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="controllers\brandsController.js" />
     <Compile Include="controllers\index.js" />
+    <Compile Include="controllers\productReviewController.js" />
     <Compile Include="controllers\productsController.js" />
     <Compile Include="data\database.js" />
     <Compile Include="data\dbConnection.js" />
@@ -44,6 +46,9 @@
     <Content Include="package.json" />
     <Content Include="public\index.html" />
     <Content Include="public\styles\style.styl" />
+    <Content Include="public\view\product-details.html" />
+    <Content Include="public\view\product-title.html" />
+    <Content Include="public\view\products.html" />
     <Content Include="README.md" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
@@ -56,6 +61,7 @@
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\js\" />
+    <Folder Include="public\view\" />
     <Folder Include="public\styles\" />
     <Folder Include="routes\" />
     <Folder Include="views\" />

@@ -7,8 +7,10 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var Promise = require('bluebird')
 
 var app = express();
+
 var controller = require('./controllers');
 
 // view engine setup
@@ -28,6 +30,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+wrap = function (genFn) {
+    var cr = Promise.coroutine(genFn)
+    return function (req, res, next) {
+        cr(req, res, next).catch(next)
+    }
+}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

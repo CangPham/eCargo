@@ -21,18 +21,18 @@
     <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="lib/toastr/toastr.min.js"></script>
     <script src="lib/loading-bar/jquery.loadingbar.min.js"></script>
+    <script src="lib/angular-route/angular-route.min.js"></script>
     <!--<script src="js/main.js"></script>
     <script src="app/services.js"></script>-->
     <script src="/js/eCargoApp.js"></script>
 </head>
 <body>
-    <div ng-controller="productsCtrl">
-        <div ng-repeat="product in products">
-            <div>{{product.Id}}</div>
-            <div>{{product.Name}}</div>
+    <div class="container">
+        <div class="page-header">
+            <h1>eCargo App</h1>
         </div>
     </div>
-
+    <div ng-view></div>
     
 </body>
 </html>
