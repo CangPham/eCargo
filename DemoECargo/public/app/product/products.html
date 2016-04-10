@@ -1,12 +1,13 @@
 ﻿<div class="container">
     <div class="row">
         <div class="col-lg-12">
-            Searh <input type="text" ng-model="query" />
+            Search <input type="text" ng-model="query" />
             Order By
-            <select ng-model="orderProp">
-                <option value="ProductName">Alphabetical</option>
+            <select  ng-model="orderProp">
+                <option value="ProductName" >Alphabetical</option>
                 <option value="Price">Price</option>
             </select>
+            
         </div>
     </div>
     <hr />
@@ -14,7 +15,7 @@
         <div class="col-md-4 col-xs-6" ng-repeat="product in products | filter: {ProductName:query} | orderBy: orderProp">
             <div class="thumbnail">
                 <div class="caption">
-                    <!--<img class="img-responsive" ng-src="{{product.image}}" />-->
+                    <img class="img-responsive" ng-src="{{product.Image ? product.Image : 'images/sorry-image-not-available.png'}}"/>  
                     <product-title></product-title>
                     <p>Price: {{product.Price}}</p>
                     <p>

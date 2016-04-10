@@ -13,26 +13,40 @@
     <link href="lib/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="lib/loading-bar/loadingbar.css" rel="stylesheet" />
     <link href="lib/toastr/toastr.min.css" rel="stylesheet" />
-    <link href="styles/style.css" rel="stylesheet" />    
+    <link href="styles/style.css" rel="stylesheet" />
+   
+</head>
+<body>
+    <!--handle error automatic-->
+    <error-handler></error-handler>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>eCargo App</h1>
+        </div>
+
+        <nav-bar></nav-bar>
+    </div>
+
+    
+
+    <div ng-view></div>
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="lib/toastr/toastr.min.js"></script>
     <script src="lib/loading-bar/jquery.loadingbar.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
-    <!--<script src="js/main.js"></script>
-    <script src="app/services.js"></script>-->
-    <script src="/js/eCargoApp.js"></script>
-</head>
-<body>
-    <div class="container">
-        <div class="page-header">
-            <h1>eCargo App</h1>
-        </div>
-    </div>
-    <div ng-view></div>
+    <script src="app/eCargoApp.js"></script>
+    <script src="app/services/services.js"></script>
+    <script src="app/common/errorhandler.js"></script>
+    <script src="app/common/handleErrorDirective.js"></script>
+    <script src="app/common/navBarDirective.js"></script>
+    <script src="app/product/productsCtrl.js"></script>
+    <script src="app/product/productTitleDirective.js"></script>
+    <script src="app/productDetail/productDetailCtrl.js"></script>
+    <script src="app/productDetail/productReviewCtrl.js"></script>        
     
 </body>
 </html>

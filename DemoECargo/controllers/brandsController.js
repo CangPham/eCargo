@@ -5,7 +5,7 @@
     var data = require('../data');
     
     brandController.init = function (app) {
-        app.get("/api/brands/", function (req, res, next) {
+        app.get("/api/brands", function (req, res, next) {
             var str = "SELECT id, name FROM brands";
             data.exec(str)
                 .then(function (results) {

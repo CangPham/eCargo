@@ -1,13 +1,8 @@
 ﻿var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var Promise = require('bluebird')
+var serveStatic = require('serve-static')
 
 var app = express();
 
@@ -17,27 +12,16 @@ var controller = require('./controllers');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-controller.init(app);
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+//show log on dev environment 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', routes);
-app.use('/users', users);
+controller.init(app);
 
+//Use middleware to serve static files
+app.use(serveStatic('public', { 'index': ['index.html', 'index.htm'] }));
 
-wrap = function (genFn) {
-    var cr = Promise.coroutine(genFn)
-    return function (req, res, next) {
-        cr(req, res, next).catch(next)
-    }
-}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -70,11 +54,5 @@ app.use(function (err, req, res, next) {
     });
 });
 
-// application -------------------------------------------------------------
-app.get('*', function (req, res) {
-    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-});
-
-//app.listen(2000);
 
 module.exports = app;
