@@ -48,6 +48,8 @@
     <Compile Include="public\app\services\services.js" />
     <Compile Include="bin\www" />
     <Content Include=".bowerrc" />
+    <Content Include="bower.json" />
+    <Content Include="Dummy_eCargo.sql" />
     <Content Include="package.json" />
     <Content Include="public\images\phone.jpg" />
     <Content Include="public\images\sorry-image-not-available.png" />

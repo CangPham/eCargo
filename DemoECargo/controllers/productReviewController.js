@@ -6,7 +6,6 @@
     
     productReviewController.init = function (app) {
         app.post("/api/addReview", function (req, res, next) {
-            console.log(req.body);
             var email = req.body.Email,
                 productId = req.body.productId,
                 rating = req.body.Rating,
