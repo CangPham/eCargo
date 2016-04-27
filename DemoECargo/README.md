@@ -22,6 +22,6 @@ Setup introduction:
 Configuaration:
 	- Config database connection of app on 'data/dbConnection.js'.
 		
-Thanks for reading.
+Thanks for reading. :D
 
 
