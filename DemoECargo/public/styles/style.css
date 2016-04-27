@@ -7,10 +7,6 @@ body {
     max-width: 750px;
 }
 
-.table > tbody > tr > td.middle {
-    vertical-align: middle;
-}
-
 .error-msgs {
     position: fixed;
     top: 0;

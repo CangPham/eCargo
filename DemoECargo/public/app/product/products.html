@@ -12,14 +12,14 @@
     </div>
     <hr />
     <div class="row">
-        <div class="col-md-4 col-xs-6" ng-repeat="product in products | filter: {ProductName:query} | orderBy: orderProp">
+        <div class="col-md-4 col-xs-6" ng-repeat="product in products | filter: {productName:query} | orderBy: orderProp">
             <div class="thumbnail">
                 <div class="caption">
-                    <img class="img-responsive" ng-src="{{product.Image ? product.Image : 'images/sorry-image-not-available.png'}}"/>  
+                    <img class="img-responsive" ng-src="{{product.imageUrl ? product.imageUrl : 'images/sorry-image-not-available.png'}}"/>  
                     <product-title></product-title>
-                    <p>Price: {{product.Price}}</p>
+                    <p>Price: {{product.price}}</p>
                     <p>
-                        <a href="#/products/{{product.ID}}" class="btn btn-primary" role="button">View details</a>                        
+                        <a href="#/products/{{product.id}}" class="btn btn-primary" role="button">View details</a>                        
                     </p>
                 </div>
             </div>

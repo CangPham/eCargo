@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2016-04-10 16:25:50
+Date: 2016-04-12 14:31:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,11 +20,11 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) NOT NULL,
-  `Description` text,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `Name` (`Name`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -41,18 +41,18 @@ INSERT INTO `brands` VALUES ('5', 'Sony', 'Sony company');
 -- ----------------------------
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ProductName` varchar(100) NOT NULL,
-  `Description` text,
-  `Price` decimal(10,0) DEFAULT NULL,
-  `Color` varchar(50) DEFAULT NULL,
-  `DateCreated` datetime DEFAULT NULL,
-  `AvailabilityStatus` tinyint(4) DEFAULT NULL,
-  `BrandID` int(11) NOT NULL,
-  `Image` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `ProductName` (`ProductName`),
-  KEY `FK_product_brand` (`BrandID`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `productName` varchar(100) NOT NULL,
+  `description` text,
+  `price` decimal(10,0) DEFAULT NULL,
+  `color` varchar(50) DEFAULT NULL,
+  `dateCreated` datetime DEFAULT NULL,
+  `availabilityStatus` tinyint(4) DEFAULT NULL,
+  `brandID` int(11) NOT NULL,
+  `imageUrl` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ProductName` (`productName`),
+  KEY `FK_product_brand` (`brandID`),
   CONSTRAINT `FK_product_brand` FOREIGN KEY (`BrandID`) REFERENCES `brands` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
@@ -90,16 +90,16 @@ INSERT INTO `products` VALUES ('26', 'Samsung S6 - 128GB', 'Samsung Galaxy S6 Fa
 -- ----------------------------
 DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE `reviews` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Rating` tinyint(4) NOT NULL,
-  `Comment` text,
-  `DateCreated` datetime DEFAULT NULL,
-  `ProductID` int(11) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  PRIMARY KEY (`ID`,`Email`),
-  KEY `FK_review_product` (`ProductID`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rating` tinyint(4) NOT NULL,
+  `comment` text,
+  `dateCreated` datetime DEFAULT NULL,
+  `productID` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`,`email`),
+  KEY `FK_review_product` (`productID`),
   CONSTRAINT `FK_review_product` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of reviews
@@ -116,19 +116,20 @@ INSERT INTO `reviews` VALUES ('9', '8', 'Good look', '2016-04-08 17:52:01', '1',
 INSERT INTO `reviews` VALUES ('10', '8', 'Good very ok', '2016-04-08 17:52:03', '1', 'test10@gmail.com');
 INSERT INTO `reviews` VALUES ('11', '8', 'Good', '2016-04-08 17:52:04', '3', 'test11@gmail.com');
 
+
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserType` tinyint(4) DEFAULT NULL,
-  `UserName` varchar(50) DEFAULT NULL,
-  `Email` varchar(50) DEFAULT NULL,
-  `DateOfBirth` date DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `UserName` (`UserName`),
-  UNIQUE KEY `Email` (`Email`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userType` tinyint(4) DEFAULT NULL,
+  `userName` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `dateOfBirth` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UserName` (`userName`),
+  UNIQUE KEY `Email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -158,12 +159,12 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getProductById`(IN `productId` int(11))
 BEGIN
 	SELECT
-		p.ID,
-		p.Description,
-		p.ProductName,
-p.Price,
-p.Color,
-p.Image
+		p.id,
+		p.description,
+		p.productName,
+		p.price,
+		p.color,
+		p.imageUrl
 	FROM
 		products p	
 	WHERE
@@ -181,15 +182,15 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getProductsByBrandId`(IN brandId INT(11), IN numberProduct INT(11))
 BEGIN
 	SELECT
-		p.ID,
-		p.ProductName,
-		p.Image,
-		p.Price
+		p.id,
+		p.productName,
+		p.imageUrl,
+		p.price
 	FROM
 		products p
 	WHERE
-		p.BrandID = brandId
-	ORDER BY p.DateCreated DESC
+		p.brandID = brandId
+	ORDER BY p.dateCreated DESC
 	LIMIT numberProduct;
 	END
 ;;
@@ -203,13 +204,13 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getReviewByProductId`(IN `productId` int(11))
 BEGIN
 	SELECT		
-r.`Comment`,
-r.Email,
-r.Rating
+		r.`comment`,
+		r.email,
+		r.rating
 	FROM
 		reviews r	
 	WHERE
-		r.ProductID = productId;
+		r.productID = productId;
 
 END
 ;;

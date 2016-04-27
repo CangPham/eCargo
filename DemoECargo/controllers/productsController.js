@@ -3,13 +3,14 @@
     "use strict";
     
     var data = require('../data');
+    var _ = require('lodash');
     
     productsController.init = function (app) {
         var numberProduct = 9;
         
         app.get("/api/products", function (req, res, next) {
-            var str = "SELECT * from products ORDER BY dateCreated DESC LIMIT " + numberProduct;
-            data.exec(str)
+            var query = _.join(["SELECT * from products ORDER BY dateCreated DESC LIMIT " , numberProduct]," ");
+            data.exec(query)
                 .then(function (results) {
                 res.json(results);
             })
@@ -19,8 +20,12 @@
         app.get("/api/products/:Id", function (req, res, next) {
             
             var productId = req.params.Id;
-            var str = "CALL getProductById(" + productId +")";
-            data.exec(str)
+            var query = "";
+            if (_.isNumber(productId)) {
+                query = _.join(["CALL getProductById(", productId, ");"], " ");
+            }
+                        
+            data.exec(query)
                 .then(function (results) {
                 res.json(results[0]);
             })
@@ -30,8 +35,12 @@
         app.get("/api/productReview/:Id", function (req, res, next) {
             
             var productId = req.params.Id;
-            var str = "CALL getReviewByProductId(" + productId + ")";
-            data.exec(str)
+            var query = "";
+            if (_.isNumber(_.toInteger(productId))) {
+                query = _.join(["CALL getReviewByProductId(", productId, ");"], " ");
+            }
+            
+            data.exec(query)
                 .then(function (results) {
                 res.json(results);
             })
@@ -41,8 +50,12 @@
         app.get("/api/productsByBrandId/:brandId", function (req, res, next) {
             
             var brandId = req.params.brandId;
-            var str = "CALL getProductsByBrandId(" + brandId + "," + numberProduct + ")";
-            data.exec(str)
+            var query = "";
+            if (_.isNumber(_.toInteger(brandId))) {
+                query = _.join(["CALL getProductsByBrandId(", brandId, ",", numberProduct, ");"], " ");
+            }
+           
+            data.exec(query)
                 .then(function (results) {
                 res.json(results[0]);
             })

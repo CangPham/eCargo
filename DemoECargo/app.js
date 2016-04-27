@@ -1,5 +1,4 @@
 ﻿var express = require('express');
-var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var serveStatic = require('serve-static')
@@ -7,10 +6,6 @@ var serveStatic = require('serve-static')
 var app = express();
 
 var controller = require('./controllers');
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 //show log on dev environment 
 app.use(logger('dev'));

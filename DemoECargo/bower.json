@@ -1,5 +1,5 @@
 {
-  "name": "eCargo",
+  "name": "eCargo_cang_pham",
   "version": "1.0.0",
   "authors": [
     "CangPham"
@@ -11,5 +11,5 @@
     "bootstrap": "^3.3.6",
     "toastr": "^2.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": { }
 }
