@@ -1,0 +1,31 @@
+﻿<div id="header">
+
+    <nav class="navbar navbar-inverse">
+
+        <div class="navbar-collapse collapse" id="menu">
+
+            <ul class="nav navbar-nav">
+
+                <li><a href="/">Home</a></li>
+
+                <li><a href="">About</a></li>
+
+                <li class="dropdown">
+
+                    <a data-toggle="dropdown" href="">Brands<span class="caret"></span></a>
+
+                    <ul class="dropdown-menu">
+
+                        <li><a href="#/products/brands/{{brand.id}}" class="list-group-item" ng-repeat="brand in ::brands">{{brand.name}}</a></li>
+
+                    </ul>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+</div>
